@@ -10,10 +10,8 @@ import java.util.List;
 public class ThymeLeafWebController {
     @GetMapping({"/", "index"})
     public String getIndex(Model model){
-        model.addAttribute("name", "Ravi");
-        model.addAttribute("condition", Boolean.FALSE);
-        model.addAttribute("role","manager");
-        model.addAttribute("students", List.of("Deny", "Ria", "Yudhi"));
+        model.addAttribute("message","I love azhar");
+        model.addAttribute("description", "I love him since 19 years old");
         return "index";
     }
 }
