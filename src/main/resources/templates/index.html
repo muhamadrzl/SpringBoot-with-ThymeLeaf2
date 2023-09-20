@@ -1,0 +1,28 @@
+<! DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Spring Boot. Thymeleaf Application</title>
+</head>
+    <body>
+    <h1>Welcome to Thymeleaf Spring Boot</h1>
+    <h2>
+        <span>Welcome <th:block th:text="${name}">[name]</th:block></span>
+    </h2>
+    <div th:if="${condition}">
+        <p> Condition is true </p>
+    </div>
+    <div th:unless="${condition}"></div>
+        <p>Condition is false</p>
+    <div th:switch="${role}">
+        <p th:case="'admin'"> User is an administrator</p>
+        <p th:case="'manager'"> User is a manager </p>
+        <p th:case="*">User is something else</p>
+    </div>
+    <div>
+        <ul>
+            <li th:each=" student : ${students}"><span th:text="${student}"></span></li>
+        </ul>
+    </div>
+</body>
+</html>
