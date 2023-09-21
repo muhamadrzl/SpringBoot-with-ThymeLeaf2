@@ -3,26 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to Spring Boot. Thymeleaf Application</title>
+    <style>
+        .error{
+            color:red
+        }
+    </style>
+    <link rel="stylesheet" th:href="@{/webjars/tailwindcss/2.1.2/dist/tailwind.min.css}">
+    <meta name="viewport" content="width-device-width", initial-scale="1.0">
 </head>
     <body>
     <h1>Welcome to Thymeleaf Spring Boot</h1>
-    <h2>
-        <span>Welcome <th:block th:text="${name}">[name]</th:block></span>
-    </h2>
-    <div th:if="${condition}">
-        <p> Condition is true </p>
-    </div>
-    <div th:unless="${condition}"></div>
-        <p>Condition is false</p>
-    <div th:switch="${role}">
-        <p th:case="'admin'"> User is an administrator</p>
-        <p th:case="'manager'"> User is a manager </p>
-        <p th:case="*">User is something else</p>
-    </div>
-    <div>
-        <ul>
-            <li th:each=" student : ${students}"><span th:text="${student}"></span></li>
-        </ul>
-    </div>
+    <div th:replace="_fragments :: footer"> </div>
+    <form th:action="@{/employee}" th:object="${employee}" method="post">
+        <div>
+            <label> Employee ID</label>
+            <input type="text" th:field="*{id}" placeholder="employee id">
+        </div>
+        <div>
+            <label>Employee Name</label>
+            <input type="text" th:field="*{name}" placeholder="employee name">
+            <p th:if="${#fields.hasErrors('name')}" th:errorclass="error"
+            th:errors="*{name}"></p>
+        </div>
+        <div>
+            <label>Department</label>
+            <select th:field="*{department}">
+            <option th:each="department : ${allDepartment}"
+                    th:value="${department}"
+                    th:text="${department}">
+            </option>
+            </select>
+        </div>
+        <input type="submit" value="submit">
+     </form>
+
+
+
+<!--    <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">-->
+<!--        <div class="md:flex">-->
+<!--            <div class="p-8">-->
+<!--                <div class="block mt-1 text-lg leading-tight font-medium text-black"-->
+<!--                     th:text="${message}"></div>-->
+<!--                <p class="mt-2 text-gray-500" th:text="${description}"></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
 </body>
 </html>
